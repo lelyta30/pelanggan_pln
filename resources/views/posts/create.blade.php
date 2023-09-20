@@ -21,7 +21,7 @@
                             @csrf
                             <div class="form-group">
                                 <label>Select contact</label>
-                                <select name="contact[]" multiple class="form-control contact">
+                                <select name="post[]" multiple class="form-control post">
                                     @foreach ($users as $user)
                                     <option value="{{$user->phone}}">{{$user->phone}}</option>
                                     @endforeach
@@ -42,7 +42,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.contact').select2();
+            $('.post').select2();
         });
     </script>
 </body>

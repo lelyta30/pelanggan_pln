@@ -25,24 +25,24 @@ class PostController extends Controller
     public function store(Request $request)
     {
         \Validator::make($request->all(), [
-            'phone' => 'required|unique:contacts|numeric'
+            'phone' => 'required|unique:posts|numeric'
         ])->validate();
 
-        $contact = new Contact;
-        $contact->phone = $request->phone;
-        $contact->save();
+        $post = new Post;
+        $post->phone = $request->phone;
+        $post->save();
 
-        $this->sendMessage('Contact registered successfully!!', $request->phone);
+        $this->sendMessage('Post registered successfully!!', $request->phone);
         return back()->with(['success' => "{$request->phone} registered"]);
     }
    
     public function sendCustomMessage(Request $request)
     {
         \Validator::make($request->all(), [
-            'contact' => 'required|array',
+            'post' => 'required|array',
             'body' => 'required',
         ])->validate();
-        $recipients = $request->contact;
+        $recipients = $request->post;
      
         foreach ($recipients as $recipient) {
             $this->sendMessage($request->body, $recipient);
