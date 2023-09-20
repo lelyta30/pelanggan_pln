@@ -2,14 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TwilioController; // Assuming TwilioController exists
 
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
 Route::post('/', [PostController::class, 'store'])->name('posts.store');
 
-// Definisi rute POST untuk mengirim pesan kustom
+// Define a route for sending custom messages
 Route::post('/custom', [PostController::class, 'sendCustomMessage'])->name('posts.sendCustomMessage');
 
-Route::resource('/posts', \App\Http\Controllers\PostController::class);
+// Resourceful routes for posts
+Route::resource('/posts', PostController::class);
 
-// Rute tambahan untuk mengirim pesan kustom (memastikan tidak ada duplikasi)
-Route::post('posts/sendCustomMessage', [PostController::class, 'sendCustomMessage'])->name('posts.sendCustomMessage');
+// Additional route for sending custom messages (ensure no duplication)
+Route::post('/posts/sendCustomMessage', [PostController::class, 'sendCustomMessage'])->name('posts.sendCustomMessage');
+
+// Route for Twilio status callback
+Route::post('/twilio/status', [TwilioController::class, 'statusCallback'])->name('twilio.statusCallback');

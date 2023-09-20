@@ -17,13 +17,13 @@
                         Send SMS
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="/custom">
+                        <form method="POST" action="{{ route('posts.sendCustomMessage') }}">
                             @csrf
                             <div class="form-group">
-                                <label>Select contact</label>
+                                <label>Select contacts</label>
                                 <select name="post[]" multiple class="form-control post">
                                     @foreach ($users as $user)
-                                    <option value="{{$user->phone}}">{{$user->phone}}</option>
+                                    <option value="{{ $user->phone }}">{{ $user->phone }}</option>
                                     @endforeach
                                 </select>
                             </div>
